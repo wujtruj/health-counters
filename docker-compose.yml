@@ -24,6 +24,11 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    # Uncomment to use custom avatar
-    # volumes:
-    #   - ./custom-avatar.png:/app/avatar.png:ro
+    # Mount custom avatar (supports multiple formats)
+    volumes:
+      - ./avatar.png:/app/avatar.png:ro
+      - ./avatar.jpg:/app/avatar.jpg:ro  
+      - ./avatar.jpeg:/app/avatar.jpeg:ro
+      - ./avatar.gif:/app/avatar.gif:ro
+      - ./avatar.webp:/app/avatar.webp:ro
+      - ./avatar.svg:/app/avatar.svg:ro
