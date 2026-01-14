@@ -16,10 +16,10 @@ const LANGUAGES = {
         name: 'English',
         flag: '🇺🇸'
     },
-    es: {
-        code: 'es',
-        name: 'Español',
-        flag: '🇪🇸'
+    pl: {
+        code: 'pl',
+        name: 'Polski',
+        flag: '🇵🇱'
     }
 };
 
@@ -64,7 +64,7 @@ function initializeElements() {
  */
 function detectBrowserLanguage() {
     const browserLang = navigator.language || navigator.userLanguage;
-    const langCode = browserLang.toLowerCase().startsWith('es') ? 'es' : 'en';
+    const langCode = browserLang.toLowerCase().startsWith('pl') ? 'pl' : 'en';
     
     currentLanguage = langCode;
     updateLanguageDisplay();
@@ -147,7 +147,7 @@ function setupLanguageToggle() {
  * Toggle between English and Spanish
  */
 function toggleLanguage() {
-    currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+    currentLanguage = currentLanguage === 'en' ? 'pl' : 'en';
     updateLanguageDisplay();
     console.log(`Language switched to: ${currentLanguage}`);
 }
@@ -157,7 +157,7 @@ function toggleLanguage() {
  */
 function updateLanguageDisplay() {
     // Update language toggle button
-    const nextLang = currentLanguage === 'en' ? 'es' : 'en';
+    const nextLang = currentLanguage === 'en' ? 'pl' : 'en';
     if (elements.langFlag) {
         elements.langFlag.textContent = LANGUAGES[nextLang].flag;
     }
@@ -223,7 +223,7 @@ function formatDate(dateString) {
         };
         
         return date.toLocaleDateString(
-            currentLanguage === 'es' ? 'es-ES' : 'en-US', 
+            currentLanguage === 'pl' ? 'pl-PL' : 'en-US', 
             options
         );
     } catch (error) {

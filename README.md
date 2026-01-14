@@ -9,7 +9,7 @@ A responsive web application that tracks daily counters for health-related miles
 ## ✨ Features
 
 - **📊 Day Counters**: Track "Days Since Healthy" and "Days Since Doctor Visit"
-- **🌐 Bilingual Support**: English/Spanish with automatic browser language detection
+- **🌐 Bilingual Support**: English/Polish with automatic browser language detection
 - **📱 Responsive Design**: Works seamlessly on desktop and mobile devices
 - **🖼️ Avatar Support**: Auto-detects multiple image formats (PNG, JPG, GIF, WebP, SVG)
 - **🐳 Docker Ready**: Easy deployment with Docker and Docker Compose
@@ -175,7 +175,7 @@ volumes:
 
 ### Available Languages
 - **English** (en) - Default for most browsers
-- **Spanish** (es) - Auto-detected for Spanish browsers
+- **Polish** (pl) - Auto-detected for Polish browsers
 
 ### Features
 - 🔄 Toggle button with flag indicators
