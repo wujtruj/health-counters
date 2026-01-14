@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-en="{{PERSON_NAME}} Health Counters" data-es="Contadores de Salud de {{PERSON_NAME}}">{{PERSON_NAME}} Health Counters</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="avatar-container">
+                <img src="avatar" alt="{{PERSON_NAME}}" class="avatar" id="avatar">
+            </div>
+            <h1 id="main-title" data-en="{{PERSON_NAME}} Health Counters" data-es="Contadores de Salud de {{PERSON_NAME}}">{{PERSON_NAME}} Health Counters</h1>
+            <div class="language-toggle">
+                <button id="lang-toggle" class="lang-btn">
+                    <span class="lang-flag">🇪🇸</span>
+                    <span class="lang-text" data-en="Español" data-es="English">Español</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="cards-container">
+                <div class="counter-card healthy-card">
+                    <div class="card-icon">🌟</div>
+                    <h2 class="card-title" data-en="Days Since Healthy" data-es="Días Desde Estar Sano">Days Since Healthy</h2>
+                    <div class="counter-value" id="healthy-counter">0</div>
+                    <p class="counter-subtitle" data-en="consecutive days" data-es="días consecutivos">consecutive days</p>
+                    <div class="start-date" data-en="Since: {{HEALTHY_START_DATE}}" data-es="Desde: {{HEALTHY_START_DATE}}">Since: {{HEALTHY_START_DATE}}</div>
+                </div>
+
+                <div class="counter-card doctor-card">
+                    <div class="card-icon">🩺</div>
+                    <h2 class="card-title" data-en="Days Since Doctor Visit" data-es="Días Desde Visita al Doctor">Days Since Doctor Visit</h2>
+                    <div class="counter-value" id="doctor-counter">0</div>
+                    <p class="counter-subtitle" data-en="days ago" data-es="días atrás">days ago</p>
+                    <div class="start-date" data-en="Last visit: {{DOCTOR_START_DATE}}" data-es="Última visita: {{DOCTOR_START_DATE}}">Last visit: {{DOCTOR_START_DATE}}</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                <span data-en="© {{CURRENT_YEAR}} Health Dashboard" data-es="© {{CURRENT_YEAR}} Panel de Salud">© {{CURRENT_YEAR}} Health Dashboard</span>
+                |
+                <a href="https://github.com/wujtruj/health-counters" target="_blank" rel="noopener noreferrer" data-en="GitHub Profile" data-es="Perfil de GitHub">GitHub Profile</a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

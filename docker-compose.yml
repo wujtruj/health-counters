@@ -1,0 +1,29 @@
+# Docker Compose for Health Counters
+# For easy development and production deployment
+
+version: '3.8'
+
+services:
+  health-counters:
+    image: health-counters:local
+    container_name: health-counters
+    ports:
+      - "8011:8011"
+    environment:
+      # Configure these values for your specific use case
+      - NODE_ENV=production
+      - PORT=8011
+      - PERSON_NAME=John Doe
+      - HEALTHY_START_DATE=2024-01-01
+      - DOCTOR_START_DATE=2024-01-15
+      - TRUST_PROXY=true  # Set to true when behind reverse proxy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:8011/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    # Uncomment to use custom avatar
+    # volumes:
+    #   - ./custom-avatar.png:/app/avatar.png:ro

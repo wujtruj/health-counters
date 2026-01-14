@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="100" fill="#667eea"/>
+  
+  <!-- Person silhouette -->
+  <g fill="#ffffff" opacity="0.9">
+    <!-- Head -->
+    <circle cx="100" cy="75" r="25"/>
+    
+    <!-- Body -->
+    <path d="M100 110 C80 110, 65 120, 65 140 L65 180 L135 180 L135 140 C135 120, 120 110, 100 110 Z"/>
+  </g>
+  
+  <!-- Health icon -->
+  <g transform="translate(150, 150)">
+    <circle r="20" fill="#4ade80"/>
+    <g fill="white" transform="translate(-8, -8)">
+      <rect x="7" y="4" width="2" height="8"/>
+      <rect x="4" y="7" width="8" height="2"/>
+    </g>
+  </g>
+</svg>
