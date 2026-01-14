@@ -21,18 +21,6 @@ if (config.trustProxy) {
     console.log('✓ Trusting proxy headers (X-Forwarded-*)');
 }
 
-// Middleware for parsing and serving static files
-app.use(express.static('.', {
-    // Cache static files for 1 hour
-    maxAge: '1h',
-    // Don't cache HTML files (they contain dynamic content)
-    setHeaders: (res, path) => {
-        if (path.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'no-cache');
-        }
-    }
-}));
-
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({
@@ -138,6 +126,18 @@ app.get('/script.js', async (req, res) => {
         res.status(500).send('console.error("Failed to load script");');
     }
 });
+
+// Middleware for parsing and serving static files (AFTER route handlers)
+app.use(express.static('.', {
+    // Cache static files for 1 hour
+    maxAge: '1h',
+    // Don't cache HTML files (they contain dynamic content)  
+    setHeaders: (res, path) => {
+        if (path.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    }
+}));
 
 // 404 handler
 app.use((req, res) => {
