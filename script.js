@@ -64,11 +64,25 @@ function initializeElements() {
  */
 function detectBrowserLanguage() {
     const browserLang = navigator.language || navigator.userLanguage;
-    const langCode = browserLang.toLowerCase().startsWith('pl') ? 'pl' : 'en';
+    const browserLangs = navigator.languages || [browserLang];
+    
+    console.log('Browser languages:', browserLangs);
+    console.log('Primary language:', browserLang);
+    
+    // Check if any of the browser languages include Polish
+    const isPolish = browserLangs.some(lang => 
+        lang && (
+            lang.toLowerCase().startsWith('pl') || 
+            lang.toLowerCase().includes('pl-') ||
+            lang.toLowerCase() === 'pl'
+        )
+    );
+    
+    const langCode = isPolish ? 'pl' : 'en';
     
     currentLanguage = langCode;
+    console.log(`Detected browser language: ${browserLang}, languages: ${browserLangs.join(', ')}, using: ${currentLanguage}`);
     updateLanguageDisplay();
-    console.log(`Detected browser language: ${browserLang}, using: ${currentLanguage}`);
 }
 
 /**
