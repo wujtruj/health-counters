@@ -131,10 +131,25 @@ app.get('/script.js', async (req, res) => {
 app.use(express.static('.', {
     // Cache static files for 1 hour
     maxAge: '1h',
-    // Don't cache HTML files (they contain dynamic content)  
+    // Don't cache HTML and JS files (they contain dynamic content)  
     setHeaders: (res, path) => {
+        if (path.endsWith('.html') || path.endsWith('.js')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    },
+    // Exclude JS files from static serving so they go through our route handlers
+    dotfiles: 'ignore',
+    index: false,
+    setHeaders: function (res, path, stat) {
+        // Don't serve JavaScript files statically
+        if (path.endsWith('.js')) {
+            res.status(404).end();
+            return;
+        }
         if (path.endsWith('.html')) {
             res.setHeader('Cache-Control', 'no-cache');
+        } else {
+            res.setHeader('Cache-Control', 'public, max-age=3600');
         }
     }
 }));
