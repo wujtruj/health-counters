@@ -146,28 +146,64 @@ All dates must be in **YYYY-MM-DD** format (ISO 8601).
 
 ## 🖼️ Avatar Setup
 
-The application automatically detects avatar images in the project root:
+The application automatically detects and serves avatar images with priority-based selection.
 
-### Supported Formats
-- `avatar.png` ← Recommended
-- `avatar.jpg` / `avatar.jpeg`
-- `avatar.gif` ← For animated avatars
-- `avatar.webp` ← Modern format
-- `avatar.svg` ← Vector graphics
+### Supported Formats (Priority Order)
+1. **avatar.png** ← **Highest priority**
+2. **avatar.jpg** / **avatar.jpeg**
+3. **avatar.gif** ← For animated avatars
+4. **avatar.webp** ← Modern format
+5. **avatar.svg** ← Vector graphics, **default placeholder**
+
+### Format Priority System
+- **Multiple formats**: Serves the highest priority format found
+- **Default placeholder**: `avatar.svg` included in repository
+- **Custom override**: Any higher priority format automatically overrides default
+- **Example**: Having both `avatar.svg` and `avatar.png` will serve the PNG
 
 ### Adding Your Avatar
 
-1. **Replace the placeholder**:
+#### Method 1: Without Rebuilding (Recommended)
+1. **Place your image** in the project root:
 ```bash
-# Copy your image to the project root
-cp /path/to/your/image.png ./avatar.png
+# Copy your image to the project root with supported name
+cp /path/to/your/image.jpg ./avatar.png
+# or ./avatar.jpg, ./avatar.gif, etc.
 ```
 
-2. **Privacy**: Avatar images are automatically excluded from Git (see `.gitignore`)
+2. **Restart container** (no rebuild needed):
+```bash
+docker-compose restart health-counters
+```
 
-3. **Docker**: Mount your avatar at runtime:
+3. **Instant update**: Avatar changes immediately
+
+#### Method 2: Docker Rebuild (Legacy)
+```bash
+# Copy image to project folder
+cp /path/to/your/image.png ./avatar.png
+
+# Rebuild and restart
+docker build -t health-counters:local .
+docker-compose down && docker-compose up -d
+```
+
+### Volume Mounts
+The docker-compose.yml automatically mounts all avatar formats:
 ```yaml
 volumes:
+  - ./avatar.png:/app/avatar.png:ro
+  - ./avatar.jpg:/app/avatar.jpg:ro  
+  - ./avatar.jpeg:/app/avatar.jpeg:ro
+  - ./avatar.gif:/app/avatar.gif:ro
+  - ./avatar.webp:/app/avatar.webp:ro
+  - ./avatar.svg:/app/avatar.svg:ro
+```
+
+### Privacy & Git
+- **Automatic exclusion**: Avatar images are excluded from Git (see `.gitignore`)
+- **Default included**: Only `avatar.svg` placeholder is tracked
+- **Custom ignored**: Your personal avatars remain private
   - ./my-avatar.png:/app/avatar.png:ro
 ```
 
