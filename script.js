@@ -79,8 +79,12 @@ function detectBrowserLanguage() {
  */
 function calculateDaysDifference(startDate, endDate = new Date()) {
     try {
+        console.log(`Calculating difference: startDate="${startDate}", endDate="${endDate.toISOString()}"`);
+        
         const start = new Date(startDate + 'T00:00:00');
         const end = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+        
+        console.log(`Parsed dates: start="${start.toISOString()}", end="${end.toISOString()}"`);
         
         if (isNaN(start.getTime())) {
             console.error(`Invalid start date: ${startDate}`);
@@ -89,6 +93,8 @@ function calculateDaysDifference(startDate, endDate = new Date()) {
         
         const diffTime = end - start;
         const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        console.log(`Date difference: ${diffTime}ms = ${diffDays} days`);
         
         return Math.max(0, diffDays);
     } catch (error) {
@@ -102,6 +108,9 @@ function calculateDaysDifference(startDate, endDate = new Date()) {
  */
 function updateCounters() {
     const now = new Date();
+    
+    console.log('Updating counters with CONFIG:', CONFIG);
+    console.log('Current date:', now.toISOString());
     
     // Calculate days since healthy
     const healthyDays = calculateDaysDifference(CONFIG.healthyStartDate, now);
