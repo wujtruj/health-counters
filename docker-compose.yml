@@ -7,8 +7,8 @@ services:
   health-counters:
     image: health-counters:local
     container_name: health-counters
-    ports:
-      - "8011:8011"
+#    ports:
+#      - "8011:8011"
     environment:
       # Configure these values for your specific use case
       - NODE_ENV=production
@@ -32,3 +32,10 @@ services:
       - ./avatar.gif:/app/avatar.gif:ro
       - ./avatar.webp:/app/avatar.webp:ro
       - ./avatar.svg:/app/avatar.svg:ro
+    networks:
+      - zoraxy
+
+networks:
+  zoraxy:
+    external:
+      name: zoraxy_network
