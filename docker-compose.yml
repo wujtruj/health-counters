@@ -24,16 +24,14 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    # Mount custom avatar (supports multiple formats)
+    # Mount project directory for avatar access
     volumes:
-      - ./avatar.png:/app/avatar.png:ro
-      - ./avatar.jpg:/app/avatar.jpg:ro  
-      - ./avatar.jpeg:/app/avatar.jpeg:ro
-      - ./avatar.gif:/app/avatar.gif:ro
-      - ./avatar.webp:/app/avatar.webp:ro
-      - ./avatar.svg:/app/avatar.svg:ro
+      - health-counters_data:/app:ro
     networks:
       - zoraxy
+
+volumes:
+  health-counters_data:
 
 networks:
   zoraxy:
