@@ -35,7 +35,8 @@ docker build -t health-counters:local .
 ```yaml
 environment:
   - PERSON_NAME=Your Name
-  - HEALTHY_START_DATE=2024-01-01
+  - IS_PERSON_HEALTHY=yes
+  - HEALTH_STATUS_CHANGE_DATE=2024-01-01
   - DOCTOR_START_DATE=2024-01-15
   - TRUST_PROXY=true  # If behind reverse proxy
 ```
@@ -88,7 +89,8 @@ docker build -t health-counters:local .
    - Add your custom values:
      ```
      PERSON_NAME=Your Name
-     HEALTHY_START_DATE=2024-01-01
+     IS_PERSON_HEALTHY=yes
+     HEALTH_STATUS_CHANGE_DATE=2024-01-01
      DOCTOR_START_DATE=2024-01-15
      TRUST_PROXY=true
      ```
