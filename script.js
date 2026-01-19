@@ -128,14 +128,19 @@ function calculateDaysDifference(startDate, endDate = new Date()) {
 function updateCounters() {
     const now = new Date();
     
-    console.log('Updating counters with CONFIG:', CONFIG);
+    console.log('=== DEBUG COUNTER UPDATE ===');
+    console.log('CONFIG:', CONFIG);
+    console.log('CONFIG.isPersonHealthy (raw):', CONFIG.isPersonHealthy);
+    console.log('CONFIG.healthStatusChangeDate:', CONFIG.healthStatusChangeDate);
     console.log('Current date:', now.toISOString());
 
     const isHealthy = isPersonHealthy();
+    console.log('isPersonHealthy() result:', isHealthy);
     updateHealthStatusUI(isHealthy);
     
     // Calculate days since healthy
     const healthyDays = calculateDaysDifference(CONFIG.healthStatusChangeDate, now);
+    console.log('Calculated healthyDays:', healthyDays);
     updateCounterValue(elements.healthyCounter, healthyDays);
     
     // Calculate days since doctor visit

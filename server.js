@@ -118,11 +118,19 @@ app.get('/script.js', async (req, res) => {
             "'{{CURRENT_YEAR}}'": `'${currentYear}'`
         };
         
+        console.log('🔄 Processing script.js with replacements:');
+        console.log('   IS_PERSON_HEALTHY:', config.isPersonHealthy);
+        console.log('   HEALTH_STATUS_CHANGE_DATE:', config.healthStatusChangeDate);
+        
         Object.entries(replacements).forEach(([placeholder, value]) => {
             js = js.replace(new RegExp(placeholder, 'g'), value);
+            console.log(`   Replaced ${placeholder} -> ${value}`);
         });
         
         res.setHeader('Content-Type', 'application/javascript');
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
         res.send(js);
     } catch (error) {
         console.error('Error serving script:', error);
