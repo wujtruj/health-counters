@@ -14,7 +14,8 @@ services:
       - NODE_ENV=production
       - PORT=${PORT:-8011}
       - PERSON_NAME=${PERSON_NAME:-"John Doe"}
-      - HEALTHY_START_DATE=${HEALTHY_START_DATE:-"2024-01-01"}
+      - IS_PERSON_HEALTHY=${IS_PERSON_HEALTHY:-"yes"}
+      - HEALTH_STATUS_CHANGE_DATE=${HEALTH_STATUS_CHANGE_DATE:-"2024-01-01"}
       - DOCTOR_START_DATE=${DOCTOR_START_DATE:-"2024-01-15"}
       - TRUST_PROXY=${TRUST_PROXY:-true}  # Set to true when behind reverse proxy
     restart: unless-stopped

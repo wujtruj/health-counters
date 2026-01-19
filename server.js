@@ -10,7 +10,8 @@ const app = express();
 const config = {
     port: process.env.PORT || 8011,
     personName: process.env.PERSON_NAME || 'John Doe',
-    healthyStartDate: process.env.HEALTHY_START_DATE || '2024-01-01',
+    isPersonHealthy: process.env.IS_PERSON_HEALTHY || 'yes',
+    healthStatusChangeDate: process.env.HEALTH_STATUS_CHANGE_DATE || '2024-01-01',
     doctorStartDate: process.env.DOCTOR_START_DATE || '2024-01-15',
     trustProxy: process.env.TRUST_PROXY === 'true' || false
 };
@@ -79,7 +80,8 @@ app.get('/', async (req, res) => {
         const currentYear = new Date().getFullYear();
         const replacements = {
             '{{PERSON_NAME}}': config.personName,
-            '{{HEALTHY_START_DATE}}': config.healthyStartDate,
+            '{{IS_PERSON_HEALTHY}}': config.isPersonHealthy,
+            '{{HEALTH_STATUS_CHANGE_DATE}}': config.healthStatusChangeDate,
             '{{DOCTOR_START_DATE}}': config.doctorStartDate,
             '{{CURRENT_YEAR}}': currentYear
         };
@@ -110,7 +112,8 @@ app.get('/script.js', async (req, res) => {
         const currentYear = new Date().getFullYear();
         const replacements = {
             "'{{PERSON_NAME}}'": `'${config.personName}'`,
-            "'{{HEALTHY_START_DATE}}'": `'${config.healthyStartDate}'`,
+            "'{{IS_PERSON_HEALTHY}}'": `'${config.isPersonHealthy}'`,
+            "'{{HEALTH_STATUS_CHANGE_DATE}}'": `'${config.healthStatusChangeDate}'`,
             "'{{DOCTOR_START_DATE}}'": `'${config.doctorStartDate}'`,
             "'{{CURRENT_YEAR}}'": `'${currentYear}'`
         };
@@ -187,7 +190,8 @@ app.listen(config.port, '0.0.0.0', () => {
     console.log('=====================================');
     console.log(`📍 Server: http://localhost:${config.port}`);
     console.log(`👤 Person: ${config.personName}`);
-    console.log(`🌟 Healthy since: ${config.healthyStartDate}`);
+    console.log(`🌟 Health status change: ${config.healthStatusChangeDate}`);
+    console.log(`❤️ Healthy now: ${config.isPersonHealthy}`);
     console.log(`🩺 Doctor visit: ${config.doctorStartDate}`);
     console.log(` Trust Proxy: ${config.trustProxy}`);
     console.log('=====================================');

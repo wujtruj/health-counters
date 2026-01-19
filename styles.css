@@ -121,6 +121,10 @@ main {
     border-top: 4px solid #4ade80;
 }
 
+.healthy-card.is-sick {
+    border-top-color: #ef4444;
+}
+
 .doctor-card {
     border-top: 4px solid #3b82f6;
 }
@@ -145,6 +149,10 @@ main {
     margin-bottom: 10px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+}
+
+.healthy-card.is-sick .counter-value {
+    color: #dc2626;
 }
 
 .doctor-card .counter-value {

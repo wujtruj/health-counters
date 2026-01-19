@@ -4,7 +4,8 @@
 // Configuration - These will be replaced by server-side templating
 const CONFIG = {
     personName: '{{PERSON_NAME}}',
-    healthyStartDate: '{{HEALTHY_START_DATE}}',
+    isPersonHealthy: '{{IS_PERSON_HEALTHY}}',
+    healthStatusChangeDate: '{{HEALTH_STATUS_CHANGE_DATE}}',
     doctorStartDate: '{{DOCTOR_START_DATE}}',
     currentYear: '{{CURRENT_YEAR}}'
 };
@@ -32,7 +33,9 @@ const elements = {
     doctorCounter: null,
     langToggle: null,
     langFlag: null,
-    langText: null
+    langText: null,
+    healthyCard: null,
+    healthyTitle: null
 };
 
 /**
@@ -57,6 +60,8 @@ function initializeElements() {
     elements.langToggle = document.getElementById('lang-toggle');
     elements.langFlag = elements.langToggle.querySelector('.lang-flag');
     elements.langText = elements.langToggle.querySelector('.lang-text');
+    elements.healthyCard = document.querySelector('.healthy-card');
+    elements.healthyTitle = document.querySelector('.healthy-card .card-title');
 }
 
 /**
@@ -125,9 +130,12 @@ function updateCounters() {
     
     console.log('Updating counters with CONFIG:', CONFIG);
     console.log('Current date:', now.toISOString());
+
+    const isHealthy = isPersonHealthy();
+    updateHealthStatusUI(isHealthy);
     
     // Calculate days since healthy
-    const healthyDays = calculateDaysDifference(CONFIG.healthyStartDate, now);
+    const healthyDays = calculateDaysDifference(CONFIG.healthStatusChangeDate, now);
     updateCounterValue(elements.healthyCounter, healthyDays);
     
     // Calculate days since doctor visit
@@ -135,6 +143,34 @@ function updateCounters() {
     updateCounterValue(elements.doctorCounter, doctorDays);
     
     console.log(`Counters updated - Healthy: ${healthyDays} days, Doctor: ${doctorDays} days`);
+}
+
+/**
+ * Determine if the person is healthy based on config
+ * @returns {boolean}
+ */
+function isPersonHealthy() {
+    const rawValue = String(CONFIG.isPersonHealthy || 'yes').trim().toLowerCase();
+    return rawValue !== 'no';
+}
+
+/**
+ * Update UI based on health status
+ * @param {boolean} isHealthy
+ */
+function updateHealthStatusUI(isHealthy) {
+    if (elements.healthyCard) {
+        elements.healthyCard.classList.toggle('is-sick', !isHealthy);
+    }
+
+    if (elements.healthyTitle) {
+        const titleEn = isHealthy ? 'days since healthy' : 'days since sick';
+        const titlePl = isHealthy ? 'dni od powrotu do zdrowia' : 'dni odkąd chory';
+        elements.healthyTitle.setAttribute('data-en', titleEn);
+        elements.healthyTitle.setAttribute('data-pl', titlePl);
+    }
+
+    updateLanguageDisplay();
 }
 
 /**
